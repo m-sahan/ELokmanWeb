@@ -10,7 +10,7 @@ CORS(app)
 CLAUDE_API_KEY = os.getenv('CLAUDE_API_KEY')
 
 # Claude istemcisini oluşturun
-client = anthropic.Anthropic(api_key=CLAUDE_API_KEY)
+client = anthropic.Client(api_key=CLAUDE_API_KEY)
 
 @app.route('/chat', methods=['POST'])
 def chat():
