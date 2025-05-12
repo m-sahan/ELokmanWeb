@@ -522,7 +522,7 @@ async function sendMessage() {
     let loadingId = showLoadingMessage(); // Loading mesajı göster
 
     try {
-        const response = await fetch('https://elokman-backend.onrender.com/chat', {
+        const response = await fetch('https://elokmanweb.onrender.com/chat', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
