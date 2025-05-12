@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Lokman</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="/" class="logo">
+                 <img src="img/elokman.png" alt="E-Lokman Logo" class="logo-img">
+                <div class="logo-text">
+                    <span>E-Lokman</span>
+                    <span>Sağlık Asistanı</span>
+                </div>
+            </a>
+
+                <div class="nav-buttons">
+                 <a href="https://neyimvar.gov.tr" target="_blank" class="nav-btn neyim-var">
+                     <img src="img/neyimvar.jpeg" alt="Neyim Var">
+                     <span>NeyimVar?</span>
+                 </a>
+                 <a href="https://mhrs.gov.tr" target="_blank" class="nav-btn randevu">
+                     <img src="img/mhrs-logo.png" alt="Randevu Al">
+                     <span>Randevu Al</span>
+                 </a>
+                 <a href="https://enabiz.gov.tr" target="_blank" class="nav-btn e-nabiz">
+                     <img src="img/enabız.png" alt="e-Nabız">
+                     <span>e-Nabız</span>
+                 </a>
+
+             </div>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <img src="img/lokmantanıtım.png" alt="AI Asistan">
+    </section>
+
+    <div class="scroll-arrow" id="scrollArrow"></div>
+
+    <main>
+        <div class="giris-container">
+            <h2>E-Lokman'a <br> Hoş Geldiniz</h2>
+            <div class="giris-secenekleri">
+                <div class="edevlet-giris">
+                    <button onclick="window.open('https://giris.turkiye.gov.tr/Giris/', '_blank')"> <img src="img/edevlett.png" alt="e-Devlet Logo">
+                        <p>e-Devlet ile Giriş</p>
+                    </button>
+                </div>
+
+                <div class="form-ayrac">
+                    <span>veya</span>
+                </div>
+
+                <div class="login-container">
+                    <form id="loginForm">
+                        <div class="input-group">
+                            <input type="text" id="username" placeholder="Kullanıcı Adı" required>
+                        </div>
+                        <div class="input-group">
+                            <input type="password" id="password" placeholder="Şifre" required>
+                        </div>
+                        <div class="sifremi-unuttum-container">
+                            <button type="button" class="sifremi-unuttum-btn" id="sifremiUnuttumBtn">Şifremi Unuttum</button>
+                        </div>
+                        <button type="submit" class="login-btn">Giriş Yap</button>
+                    </form>
+                </div>
+
+                <div class="kayit-link">
+                    <button class="kayit-btn" id="kayitBtn">Hemen Kayıt Ol</button>
+                </div>
+            </div>
+
+        <div id="kayitModal" class="modal">
+            <div class="modal-icerik">
+                <span class="kapat">&times;</span>
+                <h2>Kayıt Ol</h2>
+                <div class="form-scroll">
+                    <form id="kayitFormu">
+                        <div class="form-grup"><label for="tc">T.C. Kimlik No:</label><input type="text" id="tc" maxlength="11" pattern="\d{11}" required></div>
+                        <div class="form-grup"><label for="ad">Ad:</label><input type="text" id="ad" required></div>
+                        <div class="form-grup"><label for="soyad">Soyad:</label><input type="text" id="soyad" required></div>
+                        <div class="form-grup cinsiyet-grup">
+                            <label>Cinsiyet:</label>
+                            <div class="cinsiyet-secenekleri">
+                                <label class="cinsiyet-radio">
+                                    <input type="radio" name="cinsiyet" value="erkek" required>
+                                    <span class="radio-label">
+                                        <i class="fas fa-mars"></i>
+                                        Erkek
+                                    </span>
+                                </label>
+                                <label class="cinsiyet-radio">
+                                    <input type="radio" name="cinsiyet" value="kadin" required>
+                                    <span class="radio-label">
+                                        <i class="fas fa-venus"></i>
+                                        Kadın
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-grup"><label for="dogumTarihi">Doğum Tarihi:</label><input type="date" id="dogumTarihi" required></div>
+                        <div class="form-grup"><label for="telefon">Telefon:</label><input type="tel" id="telefon" pattern="\d{10}" placeholder="5XX XXX XX XX" required></div>
+                        <div class="form-grup"><label for="kayitEposta">E-posta:</label><input type="email" id="kayitEposta" required></div>
+                        <div class="form-grup"><label for="kayitSifre">Şifre:</label><input type="password" id="kayitSifre" required></div>
+                        <div class="form-grup"><label for="sifreTekrar">Şifre Tekrar:</label><input type="password" id="sifreTekrar" required></div>
+                        <div class="form-grup">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="kvkkOnay" required>
+                                <a href="#" id="kvkkLink">KVKK</a> metnini okudum ve onaylıyorum
+                            </label>
+                        </div>
+                        <button type="submit" class="kayit-gonder-btn"><span>Kayıt Ol</span><div class="dalga"></div></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="sifremiUnuttumModal" class="modal">
+            <div class="modal-icerik">
+                <span class="kapat">&times;</span>
+                <h2>Şifremi Unuttum</h2>
+                <form id="sifremiUnuttumFormu">
+                    <div class="form-grup"><label for="sifremiUnuttumEposta">E-posta:</label><input type="email" id="sifremiUnuttumEposta" required></div>
+                    <button type="submit" class="sifre-sifirla-btn"><span>Şifre Sıfırlama Linki Gönder</span><div class="dalga"></div></button>
+                </form>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="footer-icerik">
+            <div class="footer-bolum">
+                <h3>E-Lokman</h3>
+                <p>Senin Sağlık Asistanın</p>
+            </div>
+        </div>
+        <div class="footer-alt">
+            <p>&copy; 2025 E-Lokman. Tüm hakları saklıdır.</p> </div>
+    </footer>
+
+    <!-- KVKK Modal -->
+    <div id="kvkkModal" class="modal">
+        <div class="modal-icerik kvkk-modal">
+            <span class="kapat">&times;</span>
+            <h2>Kişisel Verilerin Korunması Aydınlatma Metni</h2>
+            <div class="kvkk-icerik">
+                <p>E-Lokman Web Sağlık Asistanı olarak, kullanıcılarımızın gizliliğini önemsiyor ve 6698 sayılı Kişisel Verilerin Korunması Kanunu ("KVKK") kapsamında kişisel verilerinizin güvenliğini sağlamak için gerekli tüm teknik ve idari tedbirleri alıyoruz.</p>
+
+                <h3>1. Veri Sorumlusu</h3>
+                <p>İşbu metin kapsamında veri sorumlusu, [E-Lokman geliştirici ekibi]'dir. Sorularınız için bizimle [e-posta adresi] üzerinden iletişime geçebilirsiniz.</p>
+
+                <h3>2. Toplanan Veriler</h3>
+                <p>Sistemimiz üzerinden aşağıdaki kişisel veriler toplanabilir:</p>
+                <ul>
+                    <li>Ad, yaş, cinsiyet</li>
+                    <li>Sağlık verileri (semptom bilgileri, giriş yapılan sorular)</li>
+                    <li>Giriş tarih/saat bilgisi</li>
+                    <li>Cihaz ve tarayıcı bilgileri (tanımlama amacıyla)</li>
+                </ul>
+
+                <h3>3. Verilerin İşlenme Amacı</h3>
+                <p>Kişisel verileriniz;</p>
+                <ul>
+                    <li>Semptomlara dayalı sağlık tahmini sağlamak</li>
+                    <li>Kişiselleştirilmiş öneriler sunmak</li>
+                    <li>Randevu ve ilaç hatırlatmaları yapmak</li>
+                    <li>Sistem performansını iyileştirmek</li>
+                </ul>
+                <p>amaçlarıyla sınırlı olarak işlenmektedir.</p>
+
+                <h3>4. Veri Saklama Süresi</h3>
+                <p>Verileriniz yalnızca hizmet süresi boyunca ve KVKK'ya uygun olarak gerekli süre kadar saklanır. Talep etmeniz durumunda verileriniz silinebilir veya anonimleştirilebilir.</p>
+
+                <h3>5. Veri Aktarımı</h3>
+                <p>Kişisel verileriniz, yurt dışına aktarılmamakta olup yalnızca sistem içi analiz ve yapay zeka süreçleri için kullanılmaktadır. Üçüncü kişilerle paylaşılmaz.</p>
+
+                <h3>6. Haklarınız</h3>
+                <p>KVKK'nın 11. maddesi uyarınca, kişisel verilerinizle ilgili olarak;</p>
+                <ul>
+                    <li>Bilgi alma</li>
+                    <li>Düzeltme veya silinmesini talep etme</li>
+                    <li>İşlenme amacını öğrenme</li>
+                    <li>İtiraz etme</li>
+                </ul>
+                <p>haklarına sahipsiniz.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

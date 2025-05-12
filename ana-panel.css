@@ -1,0 +1,1674 @@
+/* Ana Değişkenler */
+:root {
+    --primary-color: #2D87B0;
+    --secondary-color: #34A9DB;
+    --accent-color: #19B5A2;
+    --background-color: #F0F5F9;
+    --card-bg-color: #FFFFFF;
+    --text-color: #2C3E50;
+    --text-light: #607D8B;
+    --border-color: #E3EBF3;
+    --hover-color: #2578A9; /* Daha koyu hover rengi */
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --card-shadow: 0 8px 24px rgba(45, 135, 176, 0.12);
+    --sidebar-width: 280px;
+    --sidebar-collapsed-width: 70px;
+    --success-color: #2ECC71;
+    --warning-color: #F1C40F;
+    --danger-color: #E74C3C;
+    --info-color: #2196F3;
+}
+
+/* Genel Stiller */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif; /* Roboto eklendi */
+}
+
+html {
+     scroll-behavior: smooth; /* Sayfa içi geçişler için */
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    font-size: 16px; /* Temel font boyutu */
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar Stilleri */
+.sidebar {
+    width: var(--sidebar-width);
+    background: var(--card-bg-color);
+    box-shadow: var(--shadow);
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    transition: width 0.3s ease; /* Sadece genişlik animasyonu */
+}
+
+/* Sidebar Daraltılmış Durum (Opsiyonel - JS ile yönetilmeli) */
+/* .sidebar.collapsed { */
+/* width: var(--sidebar-collapsed-width); */
+/* } */
+/* .sidebar.collapsed .logo-text, */
+/* .sidebar.collapsed .user-details, */
+/* .sidebar.collapsed .btn-title, */
+/* .sidebar.collapsed .settings-btn span, */
+/* .sidebar.collapsed .logout-btn span { */
+/* display: none; */
+/* } */
+/* .sidebar.collapsed .logo-container { */
+/* justify-content: center; */
+/* } */
+/* .sidebar.collapsed .nav-btn { */
+/* justify-content: center; */
+/* } */
+/* .sidebar.collapsed .btn-icon { */
+/* margin: 0; */
+/* } */
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Logoyu ortala */
+    gap: 1rem;
+ /*   background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); */
+
+    padding: 1.5rem; /* Padding ayarlandı */
+}
+
+.logo {
+    width: 190px; /* Logo boyutu ayarlandı */
+    height: auto;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    transition: filter 0.3s ease;
+}
+.logo:hover {
+     filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+
+.user-info {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.user-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    border: 3px solid var(--border-color);
+    object-fit: cover; /* Resmin orantısını koru */
+}
+
+.user-details h3 {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+    font-weight: 500; /* Biraz daha hafif */
+}
+
+.user-details p {
+    color: var(--text-color);
+    font-weight: 600;
+    font-size: 1rem; /* Biraz büyütüldü */
+}
+
+/* Navigasyon Butonları */
+.side-nav {
+    padding: 1rem;
+    flex: 1; /* Kalan alanı doldur */
+    overflow-y: auto; /* Gerektiğinde kaydırma çubuğu */
+}
+
+.nav-btn {
+    width: 100%;
+    padding: 0.9rem 1rem; /* Padding ayarlandı */
+    margin: 0.4rem 0; /* Boşluk ayarlandı */
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Animasyon */
+    color: var(--text-color);
+    text-align: left; /* Metin sola hizalı */
+}
+
+.nav-btn:hover {
+     background-color: rgba(45, 135, 176, 0.1); /* Hafif hover efekti */
+     color: var(--primary-color);
+}
+.nav-btn.active {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    box-shadow: 0 4px 10px rgba(45, 135, 176, 0.2); /* Aktif butona gölge */
+}
+
+.btn-icon {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    flex-shrink: 0; /* İconun küçülmesini engelle */
+}
+.nav-btn.active .btn-icon {
+     color: white; /* Aktifken ikon rengi */
+}
+
+.btn-title {
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+    padding: 1rem;
+    border-top: 1px solid var(--border-color);
+    margin-top: auto; /* Footer'ı en alta iter */
+}
+
+.settings-btn, .logout-btn {
+    width: 100%;
+    padding: 0.9rem 1rem; /* Padding ayarlandı */
+    border: none;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* İkon ve metin arası boşluk */
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    background: transparent;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem; /* Font boyutu */
+    font-weight: 500; /* Font ağırlığı */
+}
+.settings-btn i, .logout-btn i {
+     font-size: 1.2rem; /* İkon boyutu */
+     width: 35px; /* Hizalama için */
+     text-align: center;
+}
+
+
+.settings-btn:hover {
+    background: rgba(45, 135, 176, 0.1);
+    color: var(--primary-color);
+}
+.logout-btn {
+     color: var(--danger-color);
+}
+.logout-btn:hover {
+    background: rgba(231, 76, 60, 0.1); /* Kırmızı hover */
+    color: var(--danger-color);
+}
+
+
+/* Ana İçerik */
+.main-content {
+    margin-left: var(--sidebar-width);
+    padding: 2rem;
+    background: var(--background-color);
+    min-height: 100vh;
+    transition: margin-left 0.3s ease, width 0.3s ease; /* Animasyonlar */
+    width: calc(100% - var(--sidebar-width));
+}
+
+/* Sidebar daraltıldığında ana içerik genişler (Opsiyonel - JS ile yönetilmeli) */
+/* .main-content.expanded { */
+/* margin-left: var(--sidebar-collapsed-width); */
+/* width: calc(100% - var(--sidebar-collapsed-width)); */
+/* } */
+
+/* İçerik Başlığı */
+.content-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    background: var(--card-bg-color);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    flex-wrap: wrap; /* Küçük ekranlarda alt alta gelmesi için */
+    gap: 1rem; /* Elemanlar arası boşluk */
+}
+
+/* Toggle Butonu (Sidebar aç/kapa için - JS ile yönetilmeli) */
+/* .toggle-btn { */
+/* width: 40px; */
+/* height: 40px; */
+/* border: none; */
+/* border-radius: 8px; */
+/* background: var(--primary-color); */
+/* color: white; */
+/* display: flex; */
+/* align-items: center; */
+/* justify-content: center; */
+/* cursor: pointer; */
+/* transition: all 0.3s ease; */
+/* margin-right: 1rem; */
+/* } */
+/* .toggle-btn:hover { */
+/* background: var(--hover-color); */
+/* transform: scale(1.05); */
+/* } */
+
+.header-title {
+    flex-grow: 1; /* Mümkün olduğunca genişle */
+}
+
+.header-title h1 {
+    font-size: 1.8rem;
+    color: var(--text-color);
+    margin-bottom: 0.3rem;
+    font-weight: 600; /* Daha belirgin başlık */
+}
+
+.header-title p {
+    color: var(--text-light);
+    font-size: 1rem;
+}
+
+.header-actions {
+    display: flex;
+    gap: 1rem;
+    flex-shrink: 0; /* Butonların küçülmesini engelle */
+}
+
+/* Genel Buton Stilleri (Örn: Yeni İlaç Ekle) */
+.add-med-btn, .add-report-btn, .mhrs-btn {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.8rem 1.5rem;
+    display: inline-flex; /* İçeriğe göre genişle */
+    align-items: center;
+    gap: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-decoration: none; /* Linkler için */
+    white-space: nowrap; /* Buton metni tek satırda */
+}
+
+.add-med-btn:hover, .add-report-btn:hover, .mhrs-btn:hover {
+    background: linear-gradient(135deg, var(--hover-color), var(--primary-color)); /* Hover rengi */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(45, 135, 176, 0.2);
+}
+.add-med-btn i, .add-report-btn i, .mhrs-btn i {
+     font-size: 1rem;
+}
+
+
+/* Dashboard Grid */
+.dashboard-grid {
+    display: grid;
+    /* grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); */ /* Otomatik sığdırma */
+    grid-template-columns: repeat(2, 1fr); /* Varsayılan 2 sütun */
+    gap: 1.5rem;
+    padding: 1rem 0; /* Üst/alt boşluk */
+    width: 100%;
+}
+
+/* Tam genişlikte kartlar için özel sınıf (AI Asistan gibi) */
+.full-width-card {
+    grid-column: 1 / -1; /* Tüm sütunları kapla */
+}
+
+/* Kart Stilleri */
+.dashboard-card, .history-card {
+    background: var(--card-bg-color);
+    border-radius: 16px;
+    box-shadow: var(--card-shadow);
+    overflow: hidden; /* İçerik taşmasını engelle */
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    border: 1px solid rgba(45, 135, 176, 0.1);
+    display: flex;
+    flex-direction: column; /* İçeriği dikeyde yönet */
+    min-height: 300px; /* Minimum yükseklik */
+}
+
+.dashboard-card:hover, .history-card:hover {
+    /* Hafif yükselme efekti */
+    /* transform: translateY(-3px); */
+    box-shadow: 0 12px 30px rgba(45, 135, 176, 0.15);
+}
+
+.ai-assistant-card, .recent-patients-card {
+    grid-column: 1 / -1; /* Tam genişlik */
+}
+.recent-patients-card {
+     min-height: auto; /* Tablo içeriğine göre yükseklik */
+}
+
+
+.card-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+.card-header::before { /* Hafif desen efekti */
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 70%);
+    z-index: 1;
+}
+
+.card-header h2 {
+    font-size: 1.4rem;
+    margin: 0;
+    position: relative;
+    z-index: 2;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.card-date {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+    position: relative;
+    z-index: 2;
+    font-weight: 500;
+}
+
+.card-content {
+    flex: 1; /* Kartın kalan alanını doldur */
+    padding: 1.8rem;
+    display: flex;
+    flex-direction: column;
+    position: relative; /* İçerik konumlandırması için */
+}
+/* Kart içeriği taşarsa scroll ekle (Örn: İlaç Listesi) */
+.medications-list, .appointment-list, .chat-messages, .visit-list {
+    flex-grow: 1; /* Alanı doldur */
+    overflow-y: auto; /* Dikey scroll */
+    padding-right: 10px; /* Scroll bar için boşluk */
+    margin-right: -10px; /* Scroll bar'ı dışarı taşır gibi */
+    max-height: 400px; /* Örnek maksimum yükseklik */
+}
+.medications-card .card-content,
+.upcoming-card .card-content {
+     padding-bottom: 70px; /* Alt butona yer aç */
+}
+
+/* Sağlık Özeti Kartı */
+.summary-card .card-content {
+     display: flex;
+     flex-direction: column; /* Alt alta sırala */
+     gap: 1.5rem; /* Özet itemleri arası boşluk */
+}
+
+.summary-item {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 1.2rem;
+    background: rgba(45, 135, 176, 0.03);
+    border-radius: 12px;
+    transition: background-color 0.3s ease;
+    border: 1px solid rgba(45, 135, 176, 0.08);
+}
+.summary-item:hover {
+    background-color: rgba(45, 135, 176, 0.06);
+}
+
+.summary-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    box-shadow: 0 4px 12px rgba(45, 135, 176, 0.15);
+    flex-shrink: 0;
+}
+
+.summary-icon.health-status { background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; }
+.summary-icon.appointments { background: linear-gradient(135deg, #4CAF50, #8BC34A); color: white; }
+.summary-icon.reports { background: linear-gradient(135deg, #FF9800, #FF5722); color: white; }
+
+.summary-details {
+    flex: 1;
+}
+
+.summary-details h3 {
+    font-size: 1.1rem; /* Boyut ayarlandı */
+    color: var(--text-color);
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+}
+
+.summary-details p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+/* AI Asistan Kartı */
+.ai-assistant-card .card-content {
+    padding: 0; /* İç padding'i sıfırla */
+}
+.ai-chat-container {
+    height: 500px; /* Sabit yükseklik */
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem; /* Mesajlar için iç boşluk */
+    background-color: #f9fafb; /* Hafif farklı arka plan */
+     max-height: none; /* Üstteki max-height'ı iptal et */
+}
+
+.message {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column; /* Bilgi ve balon alt alta */
+}
+.message.user { align-items: flex-end; }
+.message.ai { align-items: flex-start; }
+
+.message-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    gap: 0.5rem;
+}
+.message.user .message-info { justify-content: flex-end; }
+
+.message-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.message-sender {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+
+.message-bubble {
+    background: var(--card-bg-color); /* Beyaz balon */
+    padding: 0.8rem 1.2rem; /* İç boşluk */
+    border-radius: 18px; /* Yuvarlak köşeler */
+    max-width: 80%; /* Maksimum genişlik */
+    white-space: pre-wrap; /* Satır sonlarını koru */
+    word-wrap: break-word; /* Uzun kelimeleri kır */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    position: relative; /* Zaman için */
+}
+
+.message.ai .message-bubble {
+    background: rgba(45, 135, 176, 0.1);
+    color: var(--text-color);
+    border-top-left-radius: 4px; /* Sivri köşe */
+}
+
+.message.user .message-bubble {
+    background: var(--primary-color);
+    color: white;
+    border-top-right-radius: 4px; /* Sivri köşe */
+}
+.message-bubble p {
+     margin: 0; /* Paragraf boşluğunu sıfırla */
+     line-height: 1.5; /* Satır yüksekliği */
+}
+.message-bubble strong { /* Kalın metin stili */
+     font-weight: 600;
+}
+
+.message-time {
+    font-size: 0.75rem; /* Küçük font */
+    color: var(--text-light);
+    margin-top: 0.4rem; /* Balondan biraz boşluk */
+    text-align: right; /* Sağa hizalı */
+}
+.message.ai .message-time { text-align: left; }
+
+
+.chat-input {
+    display: flex;
+    gap: 0.8rem; /* Boşluk artırıldı */
+    padding: 1rem; /* Padding artırıldı */
+    background: var(--card-bg-color);
+    border-top: 1px solid var(--border-color);
+    align-items: center; /* Dikeyde ortala */
+}
+
+.input-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    background: #f0f5f9; /* Giriş alanı arka planı */
+    border-radius: 20px; /* Daha yuvarlak */
+    padding: 0.5rem 1rem; /* İç boşluk */
+    position: relative;
+}
+
+.input-wrapper input {
+    flex: 1;
+    border: none;
+    background: none;
+    padding: 0.2rem;
+    font-size: 0.95rem; /* Font boyutu */
+    outline: none;
+    color: var(--text-color);
+    margin-right: 45px; /* Mikrofon butonu için yer aç */
+}
+.input-wrapper input::placeholder {
+     color: var(--text-light);
+}
+
+#micButton {
+    position: absolute;
+    right: 10px; /* Konum ayarlandı */
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    color: var(--text-light);
+}
+#micButton:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: var(--primary-color);
+}
+#micButton.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+#micButton i { font-size: 1.2rem; }
+
+.send-btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    width: 45px; /* Boyut ayarlandı */
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(45, 135, 176, 0.2);
+    flex-shrink: 0; /* Küçülmeyi engelle */
+}
+
+.send-btn i { font-size: 1.2rem; }
+
+.send-btn:hover {
+    background: var(--hover-color);
+    transform: scale(1.05); /* Hafif büyüme */
+}
+
+.send-btn:active {
+    transform: scale(0.98); /* Tıklama efekti */
+}
+
+/* Loading animasyonu */
+.loading-dots {
+    display: inline-flex; /* Yan yana */
+    align-items: baseline; /* Noktaları hizala */
+}
+
+.loading-dots span {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background-color: currentColor; /* Balon rengini al */
+    border-radius: 50%;
+    margin: 0 2px;
+    animation: loadingDots 1.4s infinite ease-in-out both;
+}
+
+.loading-dots span:nth-child(1) { animation-delay: -0.32s; }
+.loading-dots span:nth-child(2) { animation-delay: -0.16s; }
+.loading-dots span:nth-child(3) { animation-delay: 0s; }
+
+@keyframes loadingDots {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1.0); }
+}
+
+
+/* Randevu Kartı & Listesi */
+.appointment-list { /* Ana sayfa ve randevularım sayfası için */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-height: 350px; /* Örnek yükseklik sınırı */
+    overflow-y: auto; /* Gerektiğinde scroll */
+}
+.appointment-items { /* Sadece randevularım sayfası için */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+    max-height: none; /* Yükseklik sınırı yok */
+    overflow-y: visible; /* Scroll yok */
+}
+
+.appointment-item {
+    background: var(--card-bg-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+.appointment-item:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 6px 20px rgba(45, 135, 176, 0.1);
+}
+
+.appointment-time {
+    min-width: 80px; /* Genişlik ayarlandı */
+    text-align: center;
+    flex-shrink: 0;
+    border-right: 1px solid var(--border-color); /* Ayırıcı çizgi */
+    padding-right: 1.5rem;
+}
+
+.appointment-time .time {
+    font-size: 1.4rem; /* Saat boyutu */
+    font-weight: 600;
+    color: var(--primary-color);
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+.appointment-time .date {
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.appointment-details {
+     flex-grow: 1; /* Kalan alanı doldur */
+}
+
+.appointment-details h3 {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin: 0 0 0.4rem 0;
+    font-weight: 600;
+}
+
+.appointment-details p {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    margin: 0;
+}
+
+.appointment-status {
+    padding: 0.5rem 1rem; /* İç boşluk */
+    border-radius: 20px;
+    font-size: 0.85rem; /* Font küçültüldü */
+    font-weight: 600; /* Daha belirgin */
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.appointment-status.confirmed {
+    background: rgba(46, 204, 113, 0.1); /* Yeşil arka plan */
+    color: var(--success-color); /* Yeşil metin */
+}
+/* Diğer durumlar için stiller eklenebilir */
+/* .appointment-status.pending { background: rgba(241, 196, 15, 0.1); color: var(--warning-color); } */
+/* .appointment-status.cancelled { background: rgba(231, 76, 60, 0.1); color: var(--danger-color); } */
+
+
+/* Tümünü Gör Butonu */
+.view-all-container {
+    position: absolute; /* Kartın altına sabitlenir */
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--card-bg-color);
+    padding: 1rem 1.8rem; /* Padding */
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    border-bottom-left-radius: 16px; /* Kartın köşeleriyle uyumlu */
+    border-bottom-right-radius: 16px;
+}
+
+.view-all-btn {
+    width: auto; /* İçeriğe göre genişle */
+    padding: 0.7rem 1.5rem; /* İç boşluk */
+
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    margin-top: 12px;
+    
+    
+}
+
+.view-all-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(45, 135, 176, 0.2);
+}
+
+.view-all-btn i {
+    font-size: 0.9rem; /* İkon boyutu */
+    transition: transform 0.3s ease;
+}
+
+.view-all-btn:hover i {
+    transform: translateX(3px); /* Hafif sağa kayma */
+}
+
+/* Sağlık Geçmişi Sayfası Stilleri */
+.history-grid {
+     display: grid;
+     gap: 1.5rem;
+}
+.visit-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Ziyaretler arası boşluk */
+     max-height: none; /* Yükseklik sınırı yok */
+     overflow-y: visible;
+}
+
+.visit-item {
+    background: var(--card-bg-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    gap: 1.5rem;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+.visit-item:hover {
+    border-color: var(--accent-color);
+    box-shadow: 0 6px 20px rgba(25, 181, 162, 0.1);
+}
+
+.visit-date {
+    min-width: 120px; /* Biraz daha geniş */
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 0.95rem;
+    padding-right: 1.5rem;
+    border-right: 1px solid var(--border-color);
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.visit-details {
+     flex-grow: 1;
+}
+.visit-details h3 {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin: 0 0 0.4rem 0;
+    font-weight: 600;
+}
+.visit-details p {
+     font-size: 0.95rem;
+     color: var(--text-light);
+     margin: 0 0 0.8rem 0; /* Tip etiketi için boşluk */
+}
+
+.visit-type {
+    display: inline-block;
+    padding: 0.4rem 0.9rem; /* İç boşluk */
+    border-radius: 20px;
+    background: rgba(25, 181, 162, 0.1); /* Accent color */
+    color: var(--accent-color);
+    font-size: 0.85rem; /* Küçük font */
+    font-weight: 500;
+}
+
+
+/* İlaç Yönetimi Sayfası Stilleri */
+.medications-grid {
+    display: grid;
+    /* grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); */ /* Otomatik sığdırma */
+     grid-template-columns: repeat(2, 1fr); /* Varsayılan 2 sütun */
+    gap: 1.5rem;
+     max-height: none;
+     overflow-y: visible;
+}
+
+.med-card {
+    background: var(--card-bg-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+    display: flex; /* İçerik için */
+    flex-direction: column; /* İçeriği alt alta */
+}
+.med-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 6px 20px rgba(45, 135, 176, 0.1);
+}
+
+.med-info {
+    display: flex;
+    align-items: center; /* Dikey hizalama */
+    gap: 1.2rem;
+}
+
+.med-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.8rem; /* İkon boyutu */
+    color: var(--primary-color);
+    flex-shrink: 0;
+    text-align: center;
+}
+
+.med-details {
+    flex-grow: 1; /* Kalan alanı doldur */
+}
+
+.med-details h3 {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin: 0 0 0.4rem 0;
+    font-weight: 600;
+}
+
+.med-details p { /* Doz bilgisi */
+    color: var(--text-light);
+    margin: 0 0 0.8rem 0;
+    font-size: 0.95rem;
+}
+
+.med-schedule {
+     display: flex;
+     flex-wrap: wrap; /* Zaman etiketleri sığmazsa alt satıra */
+     gap: 0.6rem; /* Etiketler arası boşluk */
+}
+
+.schedule-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem; /* İç boşluk */
+    border-radius: 20px;
+    background: rgba(45, 135, 176, 0.08);
+    color: var(--primary-color);
+    font-size: 0.85rem; /* Font boyutu */
+    font-weight: 500; /* Font ağırlığı */
+    transition: background-color 0.3s ease;
+}
+.schedule-badge:hover {
+     background-color: rgba(45, 135, 176, 0.15);
+}
+
+.delete-med-btn {
+    margin-left: auto; /* Sağa yasla */
+    color: var(--danger-color);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.6rem; /* Tıklama alanı */
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+    font-size: 1.1rem; /* İkon boyutu */
+    line-height: 1; /* Hizalama için */
+    flex-shrink: 0;
+}
+
+.delete-med-btn:hover {
+    background: rgba(231, 76, 60, 0.1);
+}
+
+/* Randevu Yönetimi Sayfası Stilleri */
+.appointments-container {
+    background: var(--card-bg-color);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 1.5rem;
+}
+.appointments-header {
+    display: flex;
+    justify-content: flex-end; /* MHRS butonunu sağa al */
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color); /* Ayırıcı çizgi */
+    padding-bottom: 1.5rem;
+}
+.appointments-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Liste daha geniş, form daha dar */
+    gap: 2rem; /* Aradaki boşluk */
+}
+
+.appointments-list h2, .add-appointment h2 {
+     font-size: 1.4rem;
+     margin-bottom: 1rem;
+     color: var(--text-color);
+     font-weight: 600;
+     padding-bottom: 0.5rem;
+     border-bottom: 2px solid var(--primary-color);
+     display: inline-block; /* Sadece metin kadar yer kapla */
+}
+
+
+/* Genel Form Stilleri */
+.form-group {
+    margin-bottom: 1.2rem; /* Form elemanları arası boşluk */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.6rem; /* Etiket altı boşluk */
+    color: var(--text-color);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group input[type="date"],
+.form-group input[type="time"],
+.form-group input[type="file"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem 1rem; /* İç boşluk */
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    font-size: 0.95rem;
+    background-color: #fdfdff; /* Hafif beyaz arka plan */
+}
+.form-group input[type="file"] {
+     padding: 0.5rem; /* Dosya inputu için farklı padding */
+     background-color: transparent;
+     border: 1px dashed var(--border-color); /* Farklı görünüm */
+     cursor: pointer;
+}
+.form-group input[type="file"]::-webkit-file-upload-button { /* Chrome/Edge/Safari */
+     background: var(--primary-color);
+     color: white;
+     border: none;
+     padding: 0.5rem 1rem;
+     border-radius: 6px;
+     cursor: pointer;
+     margin-right: 1rem;
+     transition: background-color 0.3s ease;
+}
+.form-group input[type="file"]::-webkit-file-upload-button:hover {
+     background: var(--hover-color);
+}
+.form-group input[type="file"]::file-selector-button { /* Firefox */
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-right: 1rem;
+    transition: background-color 0.3s ease;
+}
+.form-group input[type="file"]::file-selector-button:hover {
+    background: var(--hover-color);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(45, 135, 176, 0.1);
+}
+.form-group textarea {
+     min-height: 100px; /* Textarea için minimum yükseklik */
+     resize: vertical; /* Sadece dikeyde boyutlandırma */
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 1rem;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem; /* Üstten boşluk */
+}
+
+.submit-btn:hover {
+    background: var(--hover-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(45, 135, 176, 0.2);
+}
+
+/* Modal Stilleri */
+.modal {
+    display: none; /* Başlangıçta gizli */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Arka plan karartma */
+    z-index: 1100; /* Diğer elemanların üzerinde */
+    overflow-y: auto; /* İçerik sığmazsa scroll */
+    padding: 2rem; /* Kenarlardan boşluk */
+    display: none; /* JS ile açılacak */
+    align-items: center; /* İçeriği dikeyde ortala */
+    justify-content: center; /* İçeriği yatayda ortala */
+    animation: fadeIn 0.3s ease; /* Açılış animasyonu */
+}
+/* Modal açıldığında görünür yap */
+.modal[style*="block"] {
+     display: flex;
+}
+
+.modal-content {
+    background: var(--card-bg-color);
+    width: 100%;
+    max-width: 550px; /* Maksimum genişlik */
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh; /* Maksimum yükseklik */
+    animation: scaleUp 0.3s ease; /* Açılış animasyonu */
+}
+
+.modal-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0; /* Başlığın küçülmesini engelle */
+}
+
+.modal-header h2 {
+    color: var(--text-color);
+    font-size: 1.3rem;
+    margin: 0; /* Boşluk sıfırla */
+    font-weight: 600;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 1.8rem; /* Boyut artırıldı */
+    color: var(--text-light);
+    cursor: pointer;
+    padding: 0.2rem; /* Tıklama alanı */
+    line-height: 1; /* Hizalama için */
+    transition: color 0.3s ease;
+}
+
+.close-modal:hover {
+    color: var(--danger-color);
+}
+
+.modal-body {
+    padding: 1.5rem;
+    overflow-y: auto; /* Modal içeriği taşarsa scroll */
+    flex-grow: 1; /* Kalan alanı doldur */
+}
+
+/* İlaç Ekleme Modal Zaman Seçenekleri */
+.schedule-checkboxes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 sütunlu */
+    gap: 1rem; /* Aradaki boşluk */
+}
+.schedule-item label {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem; /* Checkbox, metin ve saat arası */
+    padding: 0.8rem; /* İç boşluk */
+    background-color: #f9fafb;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color 0.3s, background-color 0.3s;
+    font-size: 0.9rem;
+}
+.schedule-item label:hover {
+     border-color: var(--primary-color);
+     background-color: #f5f9fc;
+}
+.schedule-item input[type="checkbox"] {
+    width: auto; /* Otomatik boyut */
+    cursor: pointer;
+    accent-color: var(--primary-color); /* Checkbox rengi */
+    height: 16px; /* Boyut */
+    width: 16px;
+}
+.schedule-time {
+    margin-left: auto; /* Saati sağa yasla */
+    padding: 0.4rem 0.6rem; /* İç boşluk */
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    max-width: 100px; /* Maksimum genişlik */
+}
+.schedule-time:disabled {
+    background: #e9ecef;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Ayarlar Modal Checkbox Grubu */
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem; /* Checkboxlar arası */
+}
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+.checkbox-group input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+    accent-color: var(--primary-color);
+    height: 16px;
+    width: 16px;
+}
+
+/* Rapor Ekleme Modal Dosya Bilgisi */
+.file-info {
+    font-size: 0.85rem; /* Font boyutu */
+    color: var(--text-light);
+    margin-top: 0.6rem;
+    display: block; /* Görünür yap */
+    min-height: 1.2em; /* Boşken yer kaplasın */
+}
+
+
+/* Sağlık Raporları Tablosu Stilleri */
+.patients-table {
+    width: 100%;
+    border-collapse: collapse; /* Kenarlıkları birleştir */
+    margin-top: 1rem;
+    font-size: 0.95rem; /* Tablo font boyutu */
+}
+
+.patients-table th,
+.patients-table td {
+    padding: 1rem 1.2rem; /* Hücre içi boşluk */
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle; /* Dikeyde ortala */
+}
+
+.patients-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: var(--text-light); /* Başlık rengi */
+    font-size: 0.9rem; /* Başlık fontu */
+    text-transform: uppercase; /* Büyük harf */
+    letter-spacing: 0.5px;
+}
+
+.patients-table tbody tr:hover {
+    background-color: #f8f9fc; /* Satır üzerine gelince renk */
+}
+
+.patient-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.document-icon {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    width: 40px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.patient-info div {
+    flex: 1;
+}
+
+.patient-info h4 {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--text-color);
+    font-weight: 500; /* Normal ağırlık */
+}
+
+.patient-info span { /* Dosya adı */
+    font-size: 0.8rem;
+    color: var(--text-light);
+    display: block; /* Alt satırda göster */
+    margin-top: 0.2rem;
+}
+
+.status-badge {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem; /* Küçük font */
+    font-weight: 600;
+    display: inline-block;
+    min-width: 100px; /* Minimum genişlik */
+    text-align: center;
+    text-transform: uppercase; /* Büyük harf */
+    letter-spacing: 0.5px;
+}
+
+.status-badge.stable, .status-badge[class*="Normal"] { /* Hem class hem içerik için */
+    background-color: rgba(46, 204, 113, 0.1);
+    color: var(--success-color);
+}
+
+.status-badge.warning, .status-badge[class*="Takip"] {
+    background-color: rgba(241, 196, 15, 0.1);
+    color: var(--warning-color);
+}
+
+.status-badge.improving, .status-badge[class*="İyileşiyor"] {
+    background-color: rgba(33, 150, 243, 0.1);
+    color: var(--info-color);
+}
+/* Diğer durumlar için renkler eklenebilir */
+.status-badge.other {
+     background-color: rgba(158, 158, 158, 0.1); /* Gri */
+     color: #616161;
+}
+
+
+.table-action-btn {
+    padding: 0.6rem; /* Padding */
+    background-color: transparent;
+    border: 1px solid transparent; /* Başlangıçta border yok */
+    border-radius: 50%; /* Yuvarlak buton */
+    cursor: pointer;
+    transition: all 0.3s;
+    color: var(--text-light); /* İkon rengi */
+    font-size: 1rem; /* İkon boyutu */
+    margin: 0 0.2rem; /* Butonlar arası hafif boşluk */
+    line-height: 1; /* Hizalama */
+    width: 36px; /* Sabit boyut */
+    height: 36px;
+}
+
+.table-action-btn:hover {
+    background-color: rgba(45, 135, 176, 0.1); /* Hover arka plan */
+    color: var(--primary-color); /* Hover ikon rengi */
+}
+.table-action-btn.delete-report-btn:hover { /* Silme butonu için farklı renk */
+     background-color: rgba(231, 76, 60, 0.1);
+     color: var(--danger-color);
+}
+
+
+/* İlaç Hatırlatıcı Kartı Stilleri */
+.medication-reminder-card .card-content {
+     padding-bottom: 1.8rem; /* Alt boşluk */
+}
+.reminder-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-height: 300px; /* Yükseklik sınırı */
+    overflow-y: auto;
+}
+
+.reminder-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.2rem; /* İç boşluk */
+    background: #f8f9fa;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    border: 1px solid #eee;
+}
+
+.reminder-item:hover {
+    background: #f1f3f5;
+}
+
+.reminder-item.past {
+    opacity: 0.7;
+    background: #f5f5f5;
+    border-color: #ddd;
+}
+.reminder-item.past .reminder-time,
+.reminder-item.past .reminder-details h3 {
+     color: var(--text-light); /* Geçmiş hatırlatıcılar soluk */
+}
+
+
+.reminder-time {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem; /* İkon ve saat arası */
+    min-width: 80px;
+    color: var(--primary-color);
+    font-weight: 600; /* Saat belirgin */
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.reminder-time i {
+    font-size: 1.2rem;
+    color: inherit; /* Ana rengi al */
+}
+
+.reminder-details {
+    flex: 1;
+}
+
+.reminder-details h3 { /* İlaç adı */
+    margin: 0 0 0.2rem 0;
+    font-size: 1rem;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.reminder-details p { /* Doz */
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+
+.reminder-status {
+    font-size: 1.4rem; /* İkon boyutu */
+    flex-shrink: 0;
+}
+.reminder-status i.fa-bell { color: var(--primary-color); }
+.reminder-status i.fa-check-circle { color: var(--success-color); }
+
+
+.reminder-empty-state {
+    display: none; /* Başlangıçta gizli */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1rem; /* İç boşluk */
+    text-align: center;
+    color: var(--text-light);
+    min-height: 150px; /* Minimum yükseklik */
+    border: 2px dashed var(--border-color);
+    border-radius: 12px;
+}
+
+.reminder-empty-state i {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    opacity: 0.6;
+}
+
+.reminder-empty-state p {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* Bildirim Stilleri */
+.notification-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 2000; /* En üstte */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: clamp(300px, 90%, 450px); /* Genişlik aralığı */
+}
+
+.notification {
+    background: white;
+    border-radius: 8px;
+    padding: 15px 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: flex-start; /* Dikeyde üste hizala */
+    gap: 15px;
+    opacity: 1;
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    transform: translateX(0);
+    border-left: 5px solid var(--info-color); /* Tip rengi için sol border */
+}
+
+.notification.removing {
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+/* Bildirim Tipleri */
+.notification-info { border-left-color: var(--info-color); }
+.notification-success { border-left-color: var(--success-color); }
+.notification-warning { border-left-color: var(--warning-color); }
+.notification-error { border-left-color: var(--danger-color); }
+
+.notification-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    margin-top: 2px; /* Başlıkla hizalama */
+}
+
+/* İkon Renkleri */
+.notification-info .notification-icon { background: var(--info-color); }
+.notification-success .notification-icon { background: var(--success-color); }
+.notification-warning .notification-icon { background: var(--warning-color); }
+.notification-error .notification-icon { background: var(--danger-color); }
+
+
+.notification-content {
+    flex: 1;
+    word-wrap: break-word;
+}
+
+.notification-title {
+    font-weight: 600;
+    margin: 0 0 5px 0;
+    color: var(--text-color);
+    font-size: 1rem;
+}
+
+.notification-message {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.4;
+}
+
+.notification-close {
+    background: none;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    padding: 0;
+    font-size: 1.3rem;
+    transition: color 0.3s;
+    line-height: 1;
+    margin-left: 10px;
+}
+
+.notification-close:hover {
+    color: var(--text-color);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes scaleUp {
+     from { transform: scale(0.95); opacity: 0; }
+     to { transform: scale(1); opacity: 1; }
+}
+
+/* Rapor Görüntüleme Modal Stilleri */
+.report-view-content { /* Modal içeriği için özel sınıf */
+    max-width: 90%; /* Daha geniş */
+    width: 100%;
+    height: 90vh; /* Yüksekliği ayarla */
+    padding: 0; /* İç boşluğu sıfırla */
+    display: flex;
+    flex-direction: column;
+}
+.report-view-content .modal-header { /* Başlık farklı olabilir */
+     background-color: #f8f9fa;
+}
+
+.report-view-content .modal-body {
+     padding: 0; /* Body padding sıfırla */
+     flex-grow: 1; /* Kalan alanı doldur */
+     display: flex; /* iframe'i ortalamak için */
+     justify-content: center;
+     align-items: center;
+     overflow: hidden; /* Taşan iframe'i gizle */
+}
+
+.report-viewer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: auto; /* Gerekirse iframe içinde scroll */
+}
+
+#reportFrame {
+    width: 100%; /* iframe genişliği */
+    height: 100%; /* iframe yüksekliği */
+    border: none;
+    /* transform: rotate(90deg); */ /* Döndürme kaldırıldı, içerik kendi karar versin */
+    /* transform-origin: center; */
+}
+
+
+/* İçerik Bölümleri (Section'lar arası geçiş) */
+.content-section {
+    animation: fadeIn 0.4s ease; /* Geçiş animasyonu */
+}
+
+/* Responsive Tasarım */
+@media (max-width: 1200px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr; /* Büyük ekranlarda tek sütun */
+    }
+    .appointments-grid {
+        grid-template-columns: 1fr; /* Randevu sayfası tek sütun */
+    }
+     .medications-grid {
+          grid-template-columns: 1fr; /* İlaç sayfası tek sütun */
+     }
+}
+
+@media (max-width: 992px) {
+     .main-content {
+          padding: 1.5rem; /* İçerik padding azalt */
+     }
+     .header-title h1 { font-size: 1.6rem; }
+     .header-title p { font-size: 0.9rem; }
+     .patients-table th, .patients-table td { padding: 0.8rem; }
+     .patient-info { flex-direction: column; align-items: flex-start; gap: 0.5rem;}
+     .document-icon { margin-bottom: 0.5rem; }
+     .visit-item, .appointment-item { flex-direction: column; align-items: flex-start; }
+     .visit-date, .appointment-time { border-right: none; border-bottom: 1px solid var(--border-color); padding-right: 0; padding-bottom: 1rem; margin-bottom: 1rem; text-align: left; min-width: 100%;}
+
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        /* Küçük ekranlarda sidebar gizlenebilir veya farklı davranabilir */
+        /* Örnek: transform: translateX(-100%); */
+        width: 100%; /* Veya mobil için tam genişlik */
+        height: auto;
+        position: relative; /* Sabit yerine normal akış */
+        box-shadow: none;
+    }
+    .main-content {
+        margin-left: 0; /* Sidebar üstteyse margin sıfır */
+        width: 100%;
+        padding: 1rem; /* Daha az padding */
+    }
+    .dashboard-grid, .appointments-grid, .medications-grid {
+        grid-template-columns: 1fr; /* Her zaman tek sütun */
+    }
+    .modal-content {
+         max-width: 95%;
+         max-height: 95vh;
+    }
+    .content-header {
+         padding: 1rem;
+         flex-direction: column; /* Başlık ve butonlar alt alta */
+         align-items: flex-start;
+    }
+    .header-title h1 { font-size: 1.4rem; }
+    .chat-input { flex-direction: column; gap: 0.5rem; }
+    .send-btn { width: 100%; }
+    .patients-table { font-size: 0.85rem; }
+    .patients-table th, .patients-table td { padding: 0.6rem; }
+    .status-badge { padding: 0.4rem 0.8rem; font-size: 0.75rem; min-width: 80px;}
+    .table-action-btn { width: 32px; height: 32px; font-size: 0.9rem;}
+    .schedule-checkboxes { grid-template-columns: 1fr; } /* Tek sütun */
+}

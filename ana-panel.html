@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Lokman - Sağlık Asistanın</title>
+    <link rel="stylesheet" href="ana-panel.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar" id="sidebar">
+            <div class="logo-container">
+                <img src="img/elokman.png" alt="E-Lokman Logo" class="logo">
+            </div>
+
+            <div class="user-info">
+                <img src="img/user.png" alt="Kullanıcı Profili" class="user-avatar" id="userAvatar">
+                <div class="user-details">
+                    <h3>Hoş Geldiniz</h3>
+                    <p id="userNameDisplay">Mehmet Atakan Şahin</p> </div>
+            </div>
+
+            <div class="side-nav">
+                <button class="nav-btn active" data-section="homePage">
+                    <div class="btn-icon"><i class="fas fa-home"></i></div>
+                    <div class="btn-content"><span class="btn-title">Ana Sayfa</span></div>
+                </button>
+                <button class="nav-btn" data-section="healthHistory">
+                    <div class="btn-icon"><i class="fas fa-notes-medical"></i></div>
+                    <div class="btn-content"><span class="btn-title">Sağlık Geçmişim</span></div>
+                </button>
+                <button class="nav-btn" data-section="medications">
+                    <div class="btn-icon"><i class="fas fa-pills"></i></div>
+                    <div class="btn-content"><span class="btn-title">İlaçlarım</span></div>
+                </button>
+                <button class="nav-btn" data-section="appointments">
+                    <div class="btn-icon"><i class="fas fa-calendar-check"></i></div>
+                    <div class="btn-content"><span class="btn-title">Randevularım</span></div>
+                </button>
+                <button class="nav-btn" data-section="reports"> <div class="btn-icon"><i class="fas fa-clipboard-list"></i></div> <div class="btn-content"><span class="btn-title">Sağlık Raporlarım</span></div> </button> </div>
+
+            <div class="sidebar-footer">
+                <button class="settings-btn" id="settingsBtn">
+                    <i class="fas fa-cog"></i>
+                    <span>Ayarlar</span>
+                </button>
+                <button class="logout-btn" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Çıkış Yap</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="main-content" id="mainContent">
+
+            <div class="content-section" id="homePage" style="display: block;"> <div class="content-header"> <div class="header-title"> <h1>E-Lokman - Sağlık Asistanınız</h1> <p>Kişisel sağlık yönetimi için akıllı destek</p> </div> </div> <div class="dashboard-grid">
+                    <div class="dashboard-card summary-card">
+                        <div class="card-header">
+                            <h2>Sağlık Özetim</h2>
+                            <span class="card-date" id="currentDate"></span> </div>
+                        <div class="card-content" id="healthSummaryContent">
+                            <div class="summary-item">
+                                <div class="summary-icon health-status"><i class="fas fa-heartbeat"></i></div>
+                                <div class="summary-details">
+                                    <h3 id="summaryStatus">Genel Sağlık Durumu</h3>
+                                    <p id="summaryStatusDesc">Yükleniyor...</p>
+                                </div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-icon appointments"><i class="fas fa-calendar-check"></i></div>
+                                <div class="summary-details">
+                                    <h3 id="summaryAppointments">Randevu Durumu</h3>
+                                    <p id="summaryAppointmentsDesc">Yükleniyor...</p>
+                                </div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-icon reports"><i class="fas fa-clipboard-list"></i></div>
+                                <div class="summary-details">
+                                    <h3 id="summaryReports">Rapor Durumu</h3>
+                                    <p id="summaryReportsDesc">Yükleniyor...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card medications-card">
+                        <div class="card-header">
+                            <h2>İlaçlarım</h2>
+                        </div>
+                        <div class="card-content">
+                            <div class="medications-list" id="homeMedicationsList">
+                                <p>İlaç bulunamadı.</p>
+                            </div>
+                            <div class="view-all-container">
+                                <button class="view-all-btn" data-section-target="medications">
+                                    <span>Tüm İlaçlarımı Gör</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card ai-assistant-card">
+                        <div class="card-header">
+                            <h2>Lokman AI Asistan</h2>
+                        </div>
+                        <div class="card-content">
+                            <div class="ai-chat-container">
+                                <div class="chat-messages" id="chatMessages">
+                                    <div class="message ai">
+                                        <div class="message-info">
+                                            <img src="img/elokman.png" alt="AI" class="message-avatar">
+                                            <span class="message-sender">Lokman</span>
+                                        </div>
+                                        <div class="message-bubble">
+                                            <p>Merhaba, ben Lokman! Size nasıl yardımcı olabilirim?</p>
+                                        </div>
+                                        <span class="message-time">Şimdi</span>
+                                    </div>
+                                </div>
+
+                                <div class="chat-input">
+                                    <div class="input-wrapper">
+                                        <input type="text" id="userInput" placeholder="Sağlığınızla ilgili her şeyi sorabilirsiniz...">
+                                        <button class="input-action-btn" id="micButton" title="Sesli Komut">
+                                            <i class="fas fa-microphone"></i>
+                                        </button>
+                                    </div>
+                                    <button class="send-btn" id="sendButton" title="Gönder">
+                                        <i class="fas fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card upcoming-card">
+                        <div class="card-header">
+                            <h2>Yaklaşan Randevularım</h2>
+                        </div>
+                        <div class="card-content">
+                            <div class="appointment-list" id="homeAppointmentsList">
+                                <p>Yaklaşan randevu bulunamadı.</p>
+                            </div>
+
+                            <button class="view-all-btn" data-section-target="appointments">
+                                <span>Tüm Randevularımı Gör</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                     <div class="dashboard-card medication-reminder-card">
+                        <div class="card-header">
+                             <h2>Bugünkü İlaç Hatırlatıcıları</h2>
+                        </div>
+                        <div class="card-content">
+                            <div class="reminder-list" id="medicationReminders">
+                                </div>
+                            <div class="reminder-empty-state" id="emptyReminderState" style="display: none;">
+                                <i class="fas fa-calendar-times"></i>
+                                <p>Bugün için ilaç hatırlatıcısı bulunmuyor.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="content-section" id="healthHistory" style="display: none;"> <div class="content-header"> <div class="header-title"> <h1>Sağlık Geçmişim</h1> <p>Hastane ziyaretleriniz ve tedavi geçmişiniz</p> </div> </div> <div class="history-grid">
+                    <div class="history-card">
+                        <div class="card-header">
+                            <h2>Hastane Ziyaretlerim</h2>
+                        </div>
+                        <div class="card-content">
+                            <div class="visit-list" id="healthHistoryList">
+                                <p>Sağlık geçmişi bulunamadı.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section" id="medications" style="display: none;"> <div class="content-header"> <div class="header-title"> <h1>İlaçlarım</h1> <p>İlaç takibinizi buradan yapabilirsiniz</p> </div> <div class="header-actions"> <button class="add-med-btn" id="addMedBtn"> <i class="fas fa-plus"></i> Yeni İlaç Ekle </button> </div> </div> <div class="medications-grid" id="medicationsList">
+                    <p>Kayıtlı ilaç bulunamadı.</p>
+                </div>
+            </div>
+
+            <div class="content-section" id="appointments" style="display: none;"> <div class="content-header"> <div class="header-title"> <h1>Randevularım</h1> <p>Randevu takibi ve planlama</p> </div> </div> <div class="appointments-container">
+                    <div class="appointments-header">
+                        <button class="mhrs-btn" id="mhrsBtn">
+                            <i class="fas fa-plus"></i>
+                            MHRS'den Randevu Al
+                        </button>
+                    </div>
+
+                    <div class="appointments-grid">
+                        <div class="appointments-list">
+                            <h2>Tüm Randevularım</h2>
+                            <div class="appointment-items" id="appointmentsList">
+                                <p>Kayıtlı randevu bulunamadı.</p>
+                            </div>
+                        </div>
+
+                        <div class="add-appointment">
+                            <h2>Manuel Randevu Ekle</h2>
+                            <form id="addAppointmentForm"> <div class="form-group"> <label for="hospital">Hastane</label> <input type="text" id="hospital" required> </div> <div class="form-group"> <label for="department">Bölüm</label> <input type="text" id="department" required> </div> <div class="form-group"> <label for="doctor">Doktor</label> <input type="text" id="doctor" required> </div> <div class="form-group"> <label for="appDate">Tarih</label> <input type="date" id="appDate" required> </div> <div class="form-group"> <label for="appTime">Saat</label> <input type="time" id="appTime" required> </div> <button type="submit" class="submit-btn">Randevu Ekle</button> </form> </div>
+                    </div>
+                </div>
+            </div>
+
+             <div class="content-section" id="reports" style="display: none;"> <div class="content-header"> <div class="header-title"> <h1>Sağlık Raporlarım</h1> <p>Tüm sağlık raporlarınız</p> </div> <div class="header-actions"> <button class="add-report-btn" id="addReportBtn"> <i class="fas fa-plus"></i> Rapor Ekle </button> </div> </div> <div class="dashboard-card recent-patients-card">
+                    <div class="card-content">
+                        <table class="patients-table">
+                            <thead>
+                                <tr>
+                                    <th>Rapor Türü</th>
+                                    <th>Tarih</th>
+                                    <th>Doktor</th>
+                                    <th>Durum</th>
+                                    <th>İşlem</th>
+                                </tr>
+                            </thead>
+                            <tbody id="reportsTableBody">
+                                <tr><td colspan="5">Rapor bulunamadı.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal" id="addMedModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Yeni İlaç Ekle</h2>
+                <button class="close-modal" data-modal-id="addMedModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="addMedForm"> <div class="form-group"> <label for="medName">İlaç Adı</label> <input type="text" id="medName" required> </div> <div class="form-group"> <label for="medDose">Doz</label> <input type="text" id="medDose" placeholder="Örn: 500mg" required> </div> <div class="form-group"> <label>Kullanım Zamanları ve Saatleri</label> <div class="schedule-checkboxes"> <div class="schedule-item"> <label> <input type="checkbox" name="schedule" value="sabah"> Sabah <input type="time" name="sabahTime" class="schedule-time" disabled> </label> </div> <div class="schedule-item"> <label> <input type="checkbox" name="schedule" value="ogle"> Öğle <input type="time" name="ogleTime" class="schedule-time" disabled> </label> </div> <div class="schedule-item"> <label> <input type="checkbox" name="schedule" value="aksam"> Akşam <input type="time" name="aksamTime" class="schedule-time" disabled> </label> </div> <div class="schedule-item"> <label> <input type="checkbox" name="schedule" value="gece"> Gece <input type="time" name="geceTime" class="schedule-time" disabled> </label> </div> </div> </div> <button type="submit" class="submit-btn">İlaç Ekle</button> </form> </div>
+        </div>
+    </div>
+
+    <div class="modal" id="settingsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Ayarlar</h2>
+                <button class="close-modal" data-modal-id="settingsModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="settingsForm"> <div class="form-group"> <label for="userName">Ad Soyad</label> <input type="text" id="userName" required> </div> <div class="form-group"> <label for="userEmail">E-posta</label> <input type="email" id="userEmail" required> </div> <div class="form-group"> <label for="userPhone">Telefon</label> <input type="tel" id="userPhone" pattern="[0-9]{10}" placeholder="5XX XXX XX XX" required> </div> <div class="form-group"> <label>Bildirim Tercihleri</label> <div class="checkbox-group"> <label> <input type="checkbox" name="notifications" value="email"> E-posta Bildirimleri </label> <label> <input type="checkbox" name="notifications" value="sms"> SMS Bildirimleri </label> <label> <input type="checkbox" name="notifications" value="push"> Uygulama Bildirimleri </label> </div> </div> <button type="submit" class="submit-btn">Kaydet</button> </form> </div>
+        </div>
+    </div>
+
+    <div class="modal" id="reportViewModal">
+        <div class="modal-content report-view-content">
+            <div class="modal-header">
+                <h2>Rapor Görüntüle</h2>
+                <button class="close-modal" data-modal-id="reportViewModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="report-viewer">
+                    <iframe id="reportFrame" src="" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="addReportModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Yeni Rapor Ekle</h2>
+                <button class="close-modal" data-modal-id="addReportModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="addReportForm"> <div class="form-group"> <label for="reportType">Rapor Türü</label> <input type="text" id="reportType" required> </div> <div class="form-group"> <label for="reportDoctor">Doktor Adı</label> <input type="text" id="reportDoctor" required> </div> <div class="form-group"> <label for="reportDate">Tarih</label> <input type="date" id="reportDate" required> </div> <div class="form-group"> <label for="reportStatus">Durum</label> <select id="reportStatus" required> <option value="Normal">Normal</option> <option value="Takip Gerekli">Takip Gerekli</option> <option value="İyileşiyor">İyileşiyor</option> <option value="Diğer">Diğer</option> </select> </div> <div class="form-group"> <label for="reportFile">Rapor Dosyası (PDF, JPG, PNG - Max 5MB)</label> <input type="file" id="reportFile" accept=".pdf,.jpg,.jpeg,.png" required> <p class="file-info" id="addReportFileInfo"></p> </div> <button type="submit" class="submit-btn">Rapor Ekle</button> </form> </div>
+        </div>
+    </div>
+
+  <div class="notification-container" id="notificationContainer"></div>
+
+    <script src="ana-panel.js"></script>
+</body>
+</html>
